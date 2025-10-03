@@ -1,66 +1,78 @@
+% Codificação UTF-8 para Unicode, se não estivermos na engine LuaLaTeX
 \ifx\directlua\undefined
-	\usepackage[utf8]{inputenc} % Unicode
+	\usepackage[utf8]{inputenc}
 \fi
 
-\usepackage{blindtext} % Pra testar a formatação
-\usepackage{graphicx} % Imagens
+\usepackage{graphicx} % Inclusão de gráficos
+\usepackage{hyperref} % Hiperlinks e referências
 
-\usepackage{hyperref} % Pra ajudar a lidar com referências e hyperlinks
+\usepackage[sc]{mathpazo} % Fonte Palatino com pequenas maiúsculas
+\usepackage[T1]{fontenc} % Codificação T1 para fontes
+\usepackage{microtype} % Microtipografia
+\linespread{1.05} % Ajuste de espaçamento entre linhas
 
-\usepackage[sc]{mathpazo} % Usando uma fonte diferente para o documento
-	\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-	\linespread{1.05} % Aumentando o espaçamento entre as linhas (a fonte não fica tão legal com o espaçamento padrão)
-	\usepackage{microtype} % Não lembro o que isso faz
+\usepackage{siunitx} % Unidades SI
+	\sisetup{output-decimal-marker = {,}} % Vírgula como separador decimal
+	\sisetup{range-phrase = \text{--}} % En-dash para intervalos
 
-\usepackage{siunitx} % Facilita o uso das unidades do SI
-	\sisetup{output-decimal-marker = {,}} % Configura a vírgula como o separador decimal
-	\sisetup{range-phrase = \text{--}}
+\usepackage[brazilian]{babel} % Idioma português brasileiro
 
-\usepackage[brazilian]{babel} % Regras tipográficas
+% Geometria da página
+\usepackage[
+	hmarginratio=1:1,
+	top=32mm,
+	columnsep=21pt
+]{geometry}
 
-\usepackage[hmarginratio=1:1,top=32mm,columnsep=21pt]{geometry} % Margens do documento
-\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Legendas customizadas pra tabelas e imagens
-\usepackage{booktabs} % Não lembro
+% Legendas personalizadas
+\usepackage[
+	hang,
+	small,
+	labelfont=bf,up,
+	textfont=it,up
+]{caption}
 
-\usepackage{lettrine} % Pra aumentar o tamanho da primeira letra do texto (o que não é remotamente necessário pra nada)
+\usepackage{booktabs} % Formatação de tabelas
+\usepackage{lettrine} % Letras capitulares
 
-\usepackage{enumitem} % Listas customizadas
-	\setlist[itemize]{noitemsep} % Pra tornar as listas mais compactas
+\usepackage{enumitem} % Listas personalizadas
+	\setlist[itemize]{noitemsep} % Remove espaçamento em listas
 
-\usepackage{abstract}
-	\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Deixa o "Resumo" em negrito
-	\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Deixa o conteúdo do resumo em itálico
+\usepackage{abstract} % Ambiente de resumo
+	\renewcommand{\abstractnamefont}{\normalfont\bfseries} % "Resumo" em negrito
+	\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Texto em itálico pequeno
 
-\usepackage{titlesec} % Customização do título
-	\renewcommand\thesection{\Roman{section}} % Números romanos para as secções
-	\renewcommand\thesubsection{\roman{subsection}} % Para as subsecções também
-	\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Muda a aparência do título das secções
-	\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Muda a aparência do título das subsecções
+\usepackage{titlesec} % Títulos de seções
+	\renewcommand\thesection{\Roman{section}} % Numeração romana maiúscula
+	\renewcommand\thesubsection{\roman{subsection}} % Numeração romana minúscula
+	% Formato centrado para seções
+	\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{}
+	% Formato para subseções
+	\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{}
 
-\usepackage{fancyhdr} % Cabeçalho
-	\pagestyle{fancy} % Cabeçalho em todas as páginas
-	\fancyhead{}
-	\fancyfoot{}
-	\fancyhead[C]{Experimento 4: Atrito Cinético}%Lucca Pellegrini $\bullet$ \today} % Custom header text
-	\fancyfoot[C]{\thepage} % Custom footer text
+\usepackage{fancyhdr} % Cabeçalhos e rodapés
+	\pagestyle{fancy} % Estilo com cabeçalhos
+	\fancyhead{} % Limpa cabeçalhos
+	\fancyfoot{} % Limpa rodapés
+	\fancyhead[C]{Experimento 4: Atrito Cinético} % Texto no cabeçalho
+	\fancyfoot[C]{\thepage} % Numeração no rodapé
 
-\usepackage{titling} % Customização do título
+\usepackage{titling} % Título do documento
 
-\usepackage{amsmath, amsthm, amssymb, amsfonts} % AMS-TeX pra equações (em geral) mais bonitas e pra umas outras coisas
+\usepackage{amsmath, amsthm, amssymb, amsfonts} % Matemática AMS
 
-\usepackage{minted} % Para incluir código fonte
-\usepackage[dvipsnames]{xcolor} % Para a definição de cores
+\usepackage{minted} % Código com realce
+\usepackage[dvipsnames]{xcolor} % Definição de cores
 
-% Configurações para caracteres desconhecidos pelo `minted`
-\usepackage{unicode-math}
-\usepackage{newunicodechar}
-	\defaultfontfeatures{Scale = MatchLowercase}
-	\setmainfont{CMU Serif}[Scale = 1.0]
-	\setsansfont{CMU Sans Serif}
-	\setmonofont{CMU Typewriter Text}
-	\setmathfont{Latin Modern Math}
+% Configurações para Unicode em matemática e para os ambientes do `minted`
+\usepackage{unicode-math} % Suporte Unicode para matemática
+\usepackage{newunicodechar} % Caracteres Unicode personalizados
+	\defaultfontfeatures{Scale = MatchLowercase} % Escala de fontes
+	\setmainfont{CMU Serif}[Scale = 1.0] % Fonte serifada
+	\setsansfont{CMU Sans Serif} % Fonte sans-serif
+	\setmonofont{CMU Typewriter Text} % Fonte monoespaçada
+	\setmathfont{Latin Modern Math} % Fonte matemática
 
-\usepackage{csquotes} % Acho que isso serve pra facilitar lidar com citações, mas não tenho certeza
 
 \pretitle{\begin{center}\Huge\bfseries} % Formatação do título
-\posttitle{\end{center}} % Fecha a formatação
+\posttitle{\end{center}} % Fecha formatação
