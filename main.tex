@@ -1,0 +1,305 @@
+\documentclass[10pt,twoside,twocolumn]{article} % Duas colunas pra caber mais texto
+
+% Lab 4: Atrito Cinético
+% Copyright 2025 Lucca Pellegrini <lucca@verticordia.com>
+%           2025 Pedro Caiafa Andrade
+%           2025 Cauã Diniz Armani
+%           2025 Amanda Canizela
+%           2025 Júlia de Mello Teixeira
+%
+% Permission to use, copy, modify, and/or distribute this software for any
+% purpose with or without fee is hereby granted, provided that the above
+% copyright notice and this permission notice appear in all copies.
+%
+% THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+% REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+% AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+% INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+% LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+% OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+% PERFORMANCE OF THIS SOFTWARE.
+
+\ifx\directlua\undefined
+\usepackage[utf8]{inputenc} % Unicode
+\fi
+\usepackage{blindtext} % Pra testar a formatação
+\usepackage{graphicx} % Imagens
+
+\usepackage{hyperref} % Pra ajudar a lidar com referências e hyperlinks
+
+\usepackage[sc]{mathpazo} % Usando uma fonte diferente para o documento
+        \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+        \linespread{1.05} % Aumentando o espaçamento entre as linhas (a fonte não fica tão legal com o espaçamento padrão)
+        \usepackage{microtype} % Não lembro o que isso faz
+
+\usepackage{siunitx} % Facilita o uso das unidades do SI
+        \sisetup{output-decimal-marker = {,}} % Configura a vírgula como o separador decimal
+        \sisetup{range-phrase = \text{--}}
+
+\usepackage[brazilian]{babel} % Regras tipográficas
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=21pt]{geometry} % Margens do documento
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Legendas customizadas pra tabelas e imagens
+\usepackage{booktabs} % Não lembro
+
+\usepackage{lettrine} % Pra aumentar o tamanho da primeira letra do texto (o que não é remotamente necessário pra nada)
+
+\usepackage{enumitem} % Listas customizadas
+        \setlist[itemize]{noitemsep} % Pra tornar as listas mais compactas
+
+\usepackage{abstract}
+        \renewcommand{\abstractnamefont}{\normalfont\bfseries} % Deixa o "Resumo" em negrito
+        \renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Deixa o conteúdo do resumo em itálico
+
+\usepackage{titlesec} % Customização do título
+        \renewcommand\thesection{\Roman{section}} % Números romanos para as secções
+        \renewcommand\thesubsection{\roman{subsection}} % Para as subsecções também
+        \titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Muda a aparência do título das secções
+        \titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Muda a aparência do título das subsecções
+
+\usepackage{fancyhdr} % Cabeçalho
+        \pagestyle{fancy} % Cabeçalho em todas as páginas
+        \fancyhead{}
+        \fancyfoot{}
+        \fancyhead[C]{Experimento 4: Atrito Cinético}%Lucca Pellegrini $\bullet$ \today} % Custom header text
+        \fancyfoot[C]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customização do título
+
+\usepackage{url} % Pra ajudar a lidar com urls chatos
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts} % AMS-TeX pra equações (em geral) mais bonitas e pra umas outras coisas
+
+\usepackage{minted} % Para incluir código fonte
+\usepackage[dvipsnames]{xcolor} % Para a definição de cores
+
+% Configurações para caracteres desconhecidos pelo `minted`
+\usepackage{unicode-math}
+\usepackage{newunicodechar}
+\defaultfontfeatures{Scale = MatchLowercase}
+\setmainfont{CMU Serif}[Scale = 1.0]
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\setmathfont{Latin Modern Math}
+
+\usepackage{csquotes} % Acho que isso serve pra facilitar lidar com citações, mas não tenho certeza
+
+\setlength{\droptitle}{-4\baselineskip} % Sobe o título um pouco pra economizar espaço
+
+\pretitle{\begin{center}\Huge\bfseries} % Formatação do título
+\posttitle{\end{center}} % Fecha a formatação
+
+%------------------------------------------------------------------------------------
+% TÍTULO
+%------------------------------------------------------------------------------------
+
+\title{Atrito Cinético}
+\author{
+        \textsc{Amanda Canizela} \\[1ex] % Aqui, pode-se colocar uma footnote com o comando \thanks{alguma coisa}
+        \normalsize{847501}
+        \and % Mais autores, se necessário
+        \textsc{Cauã Diniz} \\[1ex]
+        \normalsize{843988}
+        \and
+        \textsc{Júlia de Mello} \\[1ex]
+        \normalsize{819881}
+        \and
+        \textsc{Lucca Pellegrini} \\[1ex]
+        \normalsize{842986}
+        \and
+        \textsc{Pedro Vitor Caiafa} \\[1ex]
+        \normalsize{842843}
+}
+
+\date{\today} % Data
+\renewcommand{\maketitlehookd}{         % O resumo
+        \begin{abstract}
+        \noindent
+				Este experimento didático visa determinar o coeficiente de
+				atrito cinético entre um bloco de madeira e uma superfície
+				inclinada, utilizando uma rampa ajustada a $\SI{30}{\degree}$.
+				Através de medições de tempo e posição com sensores de luz,
+				ajustamos os dados a uma equação quadrática para calcular a
+				aceleração e, subsequentemente, o coeficiente de atrito. Os
+				resultados indicam um valor de $\mu_k = 0,093 \pm 0,006$,
+				compatível com materiais como madeira e plástico, destacando a
+				eficácia do método e a importância das incertezas experimentais
+				na análise física.
+        \end{abstract}
+}
+
+%------------------------------------------------------------------------------------
+
+\begin{document}
+%\pagenumbering{gobble} % Esconde o número de página, porque o documento é pequeno
+
+
+% Renderiza o título
+\maketitle
+
+%------------------------------------------------------------------------------------
+% TEXTO
+%------------------------------------------------------------------------------------
+
+\section{Motivação}
+
+O atrito é uma das forças mais presentes no cotidiano e desempenha papel
+fundamental em diversos sistemas físicos e tecnológicos. Entender como
+determinar o coeficiente de atrito cinético em um plano inclinado nos permite
+modelar desde situações simples, como o movimento de objetos em superfícies
+inclinadas, até aplicações em engenharia e transporte, onde a previsão do
+atrito é essencial para a segurança e eficiência. O experimento realizado
+possibilita, portanto, compreender de forma prática como medir esse coeficiente
+e quais fatores influenciam sua determinação.
+
+\section{Materiais}
+
+Para a realização do experimento utilizamos:
+
+\begin{itemize}
+    \item Rampa com ângulo ajustável, fixada em $\SI{30 \pm 0.5}{\degree}$;
+    \item Dois sensores de luz com cronômetro digital acoplado;
+    \item Bloco de massa $\SI{22}{\gram}$;
+	\item Régua com marcações de $\SIrange{0.05}{0.32}{\metre};$
+	\item Um pequeno script em \textit{Python}\footnote{Veja o
+		Anexo~\ref{sec:python}.} para análise de dados, geração do gráfico, e
+		ajuste de curva.
+\end{itemize}
+
+\section{Métodos}
+
+O bloco foi liberado a partir do repouso sobre a rampa inclinada de $30^\circ$.
+Com o auxílio dos sensores de luz, medimos o tempo $t$ que o bloco levava para
+percorrer intervalos de $\SI{0,05}{\metre}$. Os dados coletados foram ajustados
+no script \textit{Python} a uma função linear do tipo:
+
+\begin{align}
+	x(t) &= \frac{at^2}{2} + v_0t, \nonumber \\
+	x(t) &= At^2 + Bt
+\end{align}
+
+onde consideramos $t^2$ como nossa variável independente, $A = \frac{a}{2}$, e
+a posição inicial como $x(0) = \SI{0}{\meter}$.
+
+\section{Resultados}
+
+A tabela~\ref{tbl:dados} mostra os valores medidos de $\Delta x$, $t$ e
+$t^2$, sem arredondamento:
+
+\begin{table}[ht!]
+	\centering
+		\begin{tabular}{|| c | c | c ||}
+		\hline
+		$\Delta x$ ($\SI{}{\metre}$) & $t$ ($\SI{}{\second}$) & $t^2$ ($\SI{}{\second^2}$) \\
+		\hline\hline
+		$0,05$ & $0,10225$ & $0,0104500625$ \\
+		$0,10$ & $0,18040$ & $0,0325441600$ \\
+		$0,15$ & $0,22880$ & $0,0522944400$ \\
+		$0,20$ & $0,27200$ & $0,0739840000$ \\
+		$0,25$ & $0,31830$ & $0,1012608900$ \\
+		$0,30$ & $0,35640$ & $0,1270100000$ \\
+		$0,35$ & $0,39620$ & $0,1569816400$ \\
+		\hline
+	\end{tabular}
+	\caption{Valores de $\Delta x$, $t$ e $t^2$ medidos sem arredondamento.}
+	\label{tbl:dados}
+\end{table}
+
+Do ajuste linear (veja a figura~\ref{fig:kinetic_friction}), obtivemos:
+
+\begin{align}\label{eq:accel}
+	A &= \left( 2,056 \pm 0,066 \right) \si{\metre\per\second\squared}, \nonumber \\
+	\therefore 2A &= a \Rightarrow \nonumber \\
+	a &= \left( 4,1 \pm 0,1 \right) \si{\metre\per\second\squared}.
+\end{align}
+
+Sabemos que, para um corpo em um plano inclinado com atrito:
+
+\begin{align}\label{eq:mu}
+	\frac{a}{g} &= \sin\theta - \mu_k \cos\theta, \nonumber \\
+	\mu_k &= \frac{\sin\theta - \frac{a}{g}}{\cos\theta}.
+\end{align}
+
+\section{Incertezas}
+
+Para calcular a incerteza, determinamos os valores máximo e mínimo possíveis em
+(\ref{eq:mu}) da seguinte forma:
+
+\begin{align*}
+	\mu_{k_\text{max}} &= \frac{\sin(\theta + \Delta\theta) - \frac{a - \Delta a}{g + \Delta g}}{\cos(\theta + \Delta\theta)}, \\
+	\mu_{k_\text{min}} &= \frac{\sin(\theta - \Delta\theta) - \frac{a + \Delta a}{g - \Delta g}}{\cos(\theta - \Delta\theta)}.
+\end{align*}
+
+
+Substituindo $g = \SI{9.8}{\meter\per\second\squared}$, $\Delta g =
+\SI{0.05}{\meter\per\second\squared}$, $\theta = \SI{30}{\degree}$,
+$\Delta\theta = \SI{0.5}{\degree}$, e os valores de $a$ e $\Delta a$ obtidos em
+(\ref{eq:accel}), temos:
+
+\begin{align*}
+	\mu_{k_\text{max}} &\approx 0,11279, \\
+	\mu_{k_\text{min}} &\approx 0,07296, \\
+	\overline\mu_k = \frac{\mu_{k_\text{max}} + \mu_{k_\text{min}}}{2} &\approx 0,09287, \\
+	\Delta\mu_k = \frac{\mu_{k_\text{max}} - \mu_{k_\text{min}}}{2\sqrt{3}} &\approx 0,00558.
+\end{align*}
+
+\section{Conclusão}
+
+O valor do coeficiente de atrito cinético encontrado foi:
+
+\begin{equation*}
+	\mu_k = 0,093 \pm 0,006.
+\end{equation*}
+
+Esse valor é compatível com superfícies de madeira e plástico em contato, e
+demonstra a importância de considerar as incertezas experimentais. O método
+adotado, via ajuste linear da posição em função do tempo ao quadrado,
+mostrou-se eficaz para determinar a aceleração e, consequentemente, o
+coeficiente de atrito cinético no sistema analisado.
+
+%------------------------------------------------------------------------------------
+
+
+\begin{onecolumn}
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm]{kinetic_friction_plot.pdf}
+		\caption{
+			Gráfico de posição $\Delta x$ em função do tempo ao quadrado $t^2$.
+			O ajuste linear fornece $A = (2,056 \pm 0,066)$\,m/s$^2$ e $B =
+			(0,037 \pm 0,006)$\,m/s, onde $A = \frac{a}{2}$ e $B = v_0$.
+		}
+        \label{fig:kinetic_friction}
+\end{figure}
+\end{onecolumn}
+
+\newpage
+%------------------------------------------------------------------------------------
+% REFERÊNCIAS
+%------------------------------------------------------------------------------------
+
+%\bibliographystyle{unsrt}
+%\bibliography{ref}
+
+%------------------------------------------------------------------------------------
+
+\appendix
+
+\section{Código Fonte do Script Python}\label{sec:python}
+
+Segue abaixo o script escrito para esse experimento. O módulo auxiliar
+\texttt{PhysPlot}, de minha autoria, pode ser encontrado no meu
+GitHub.\footnote{\url{https://github.com/lucca-pellegrini/PhysPlot/blob/v0.1.0}}
+
+\inputminted[
+	linenos = true,
+	style = staroffice,
+	fontsize = \footnotesize,
+	frame = lines,
+	framesep=2em,
+	rulecolor=\color{Gray},
+	label=\fbox{\color{Black}kinetic\_friction.py},
+	labelposition=topline
+]{python}{kinetic_friction.py}
+
+\end{document}
