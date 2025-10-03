@@ -98,7 +98,9 @@ Para a realização do experimento utilizamos:
     \item Bloco de massa $\SI{22}{\gram}$;
 	\item Régua com marcações de $\SIrange{0.05}{0.35}{\metre};$
 	\item Um pequeno script em \textit{Python} (veja o Anexo~\ref{sec:python})
-		para análise de dados, geração do gráfico, e ajuste de curva.
+		para análise de dados, geração do gráfico, e ajuste de curva;
+	\item O programa \textit{SciDAVis} para verificação dos ajustes, incertezas
+		e gráficos gerados.
 \end{itemize}
 
 \section{Métodos}
@@ -111,7 +113,9 @@ repouso sobre a rampa inclinada. Com o auxílio dos sensores de luz, medimos o
 tempo $t$ que o bloco levava para percorrer intervalos de $\SI{0.05}{\metre}$,
 começando do ponto inicial e repetindo para distâncias cumulativas de
 $\SI{0,05}{\metre}$ até $\SI{0.35}{\metre}$. Os dados coletados foram ajustados
-no script \textit{Python} a uma função linear do tipo:
+no script \textit{Python}---comparando sempre com o \textit{SciDAVis} para
+confirmar valores idênticos no ajuste, nas incertezas e na figura gerada---a
+uma função linear do tipo:
 
 \begin{align*}
 	x(t) &= \frac{at^2}{2} + v_0t, \\
@@ -182,7 +186,9 @@ O valor do coeficiente de atrito cinético encontrado foi:
 Esse valor é compatível com superfícies de madeira em contato com acrílico,
 confirmando a validade do experimento. O método de ajuste linear da posição em
 função do tempo ao quadrado mostrou-se eficaz para determinar a aceleração
-constante, permitindo calcular $\mu_k$ com base nas equações teóricas. As
+constante, permitindo calcular $\mu_k$ com base nas equações teóricas. Os
+resultados obtidos com o script Python foram idênticos aos do
+\textit{SciDAVis}, confirmando a precisão do código de nossa autoria. As
 incertezas experimentais, incluindo erros na medição do ângulo e da aceleração
 gravitacional, foram consideradas adequadamente. O resultado mostra que o
 experimento seguiu os princípios da mecânica clássica, com boa concordância
