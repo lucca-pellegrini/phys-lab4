@@ -67,11 +67,14 @@
 % Configurações para Unicode em matemática e para os ambientes do `minted`
 \usepackage{unicode-math} % Suporte Unicode para matemática
 \usepackage{newunicodechar} % Caracteres Unicode personalizados
+\ifx\directlua\undefined
+\else
 	\defaultfontfeatures{Scale = MatchLowercase} % Escala de fontes
 	\setmainfont{CMU Serif}[Scale = 1.0] % Fonte serifada
 	\setsansfont{CMU Sans Serif} % Fonte sans-serif
 	\setmonofont{CMU Typewriter Text} % Fonte monoespaçada
 	\setmathfont{Latin Modern Math} % Fonte matemática
+\fi
 
 \usepackage{pbalance} % Balanceia a disposição das colunas na última página
 
