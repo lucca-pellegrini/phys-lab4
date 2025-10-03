@@ -1,5 +1,7 @@
-\documentclass[10pt,oneside,twocolumn,a4paper]{article} % Duas colunas pra caber mais texto
+\documentclass[10pt,oneside,twocolumn,a4paper]{article}
+\input{def.tex}
 
+%==============================================================================
 % Lab 4: Atrito Cinético
 % Copyright 2025 Lucca Pellegrini <lucca@verticordia.com>
 %           2025 Pedro Caiafa Andrade
@@ -18,127 +20,45 @@
 % LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 % OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 % PERFORMANCE OF THIS SOFTWARE.
+%==============================================================================
 
-\ifx\directlua\undefined
-	\usepackage[utf8]{inputenc} % Unicode
-\fi
-
-\usepackage{blindtext} % Pra testar a formatação
-\usepackage{graphicx} % Imagens
-
-\usepackage{hyperref} % Pra ajudar a lidar com referências e hyperlinks
-
-\usepackage[sc]{mathpazo} % Usando uma fonte diferente para o documento
-	\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-	\linespread{1.05} % Aumentando o espaçamento entre as linhas (a fonte não fica tão legal com o espaçamento padrão)
-	\usepackage{microtype} % Não lembro o que isso faz
-
-\usepackage{siunitx} % Facilita o uso das unidades do SI
-	\sisetup{output-decimal-marker = {,}} % Configura a vírgula como o separador decimal
-	\sisetup{range-phrase = \text{--}}
-
-\usepackage[brazilian]{babel} % Regras tipográficas
-
-\usepackage[hmarginratio=1:1,top=32mm,columnsep=21pt]{geometry} % Margens do documento
-\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Legendas customizadas pra tabelas e imagens
-\usepackage{booktabs} % Não lembro
-
-\usepackage{lettrine} % Pra aumentar o tamanho da primeira letra do texto (o que não é remotamente necessário pra nada)
-
-\usepackage{enumitem} % Listas customizadas
-	\setlist[itemize]{noitemsep} % Pra tornar as listas mais compactas
-
-\usepackage{abstract}
-	\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Deixa o "Resumo" em negrito
-	\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Deixa o conteúdo do resumo em itálico
-
-\usepackage{titlesec} % Customização do título
-	\renewcommand\thesection{\Roman{section}} % Números romanos para as secções
-	\renewcommand\thesubsection{\roman{subsection}} % Para as subsecções também
-	\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Muda a aparência do título das secções
-	\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Muda a aparência do título das subsecções
-
-\usepackage{fancyhdr} % Cabeçalho
-	\pagestyle{fancy} % Cabeçalho em todas as páginas
-	\fancyhead{}
-	\fancyfoot{}
-	\fancyhead[C]{Experimento 4: Atrito Cinético}%Lucca Pellegrini $\bullet$ \today} % Custom header text
-	\fancyfoot[C]{\thepage} % Custom footer text
-
-\usepackage{titling} % Customização do título
-
-\usepackage{amsmath, amsthm, amssymb, amsfonts} % AMS-TeX pra equações (em geral) mais bonitas e pra umas outras coisas
-
-\usepackage{minted} % Para incluir código fonte
-\usepackage[dvipsnames]{xcolor} % Para a definição de cores
-
-% Configurações para caracteres desconhecidos pelo `minted`
-\usepackage{unicode-math}
-\usepackage{newunicodechar}
-	\defaultfontfeatures{Scale = MatchLowercase}
-	\setmainfont{CMU Serif}[Scale = 1.0]
-	\setsansfont{CMU Sans Serif}
-	\setmonofont{CMU Typewriter Text}
-	\setmathfont{Latin Modern Math}
-
-\usepackage{csquotes} % Acho que isso serve pra facilitar lidar com citações, mas não tenho certeza
-
-%------------------------------------------------------------------------------
-% TÍTULO
-%------------------------------------------------------------------------------
-
-% \setlength{\droptitle}{-4\baselineskip} % Sobe o título um pouco pra economizar espaço
-
-\pretitle{\begin{center}\Huge\bfseries} % Formatação do título
-\posttitle{\end{center}} % Fecha a formatação
+%- Título e Resumo ------------------------------------------------------------
 
 \title{Atrito Cinético}
 \author{
-        \textsc{Amanda Canizela} \\[1ex] % Aqui, pode-se colocar uma footnote com o comando \thanks{alguma coisa}
-        \normalsize{847501}
-        \and % Mais autores, se necessário
-        \textsc{Cauã Diniz} \\[1ex]
-        \normalsize{843988}
-        \and
-        \textsc{Júlia de Mello} \\[1ex]
-        \normalsize{819881}
-        \and
-        \textsc{Lucca Pellegrini} \\[1ex]
-        \normalsize{842986}
-        \and
-        \textsc{Pedro Vitor Caiafa} \\[1ex]
-        \normalsize{842843}
+	\textsc{Amanda Canizela} \\[1ex]
+	\normalsize{847501}
+	\and \textsc{Cauã Diniz} \\[1ex]
+	\normalsize{843988}
+	\and \textsc{Júlia de Mello} \\[1ex]
+	\normalsize{819881}
+	\and \textsc{Lucca Pellegrini} \\[1ex]
+	\normalsize{842986}
+	\and \textsc{Pedro Vitor Caiafa} \\[1ex]
+	\normalsize{842843}
 }
 
-\date{\today} % Data
-\renewcommand{\maketitlehookd}{         % O resumo
-        \begin{abstract}
-        \noindent
-				Este experimento didático visa determinar o coeficiente de
-				atrito cinético entre um bloco de madeira e uma superfície
-				inclinada, utilizando uma rampa ajustada a $\SI{30}{\degree}$.
-				Através de medições de tempo e posição com sensores de luz,
-				ajustamos os dados a uma equação quadrática para calcular a
-				aceleração e, subsequentemente, o coeficiente de atrito. Os
-				resultados indicam um valor de $\mu_k = 0,093 \pm 0,006$,
-				compatível com materiais como madeira e plástico, destacando a
-				eficácia do método e a importância das incertezas experimentais
-				na análise física.
-        \end{abstract}
+\date{\today}
+\renewcommand{\maketitlehookd}{
+	\begin{abstract}
+	\noindent
+		Este experimento didático visa determinar o coeficiente de atrito
+		cinético entre um bloco de madeira e uma superfície inclinada,
+		utilizando uma rampa ajustada a $\SI{30}{\degree}$. Através de medições
+		de tempo e posição com sensores de luz, ajustamos os dados a uma
+		equação quadrática para calcular a aceleração e, subsequentemente, o
+		coeficiente de atrito. Os resultados indicam um valor de $\mu_k = 0,093
+		\pm 0,006$, compatível com materiais como madeira e plástico,
+		destacando a eficácia do método e a importância das incertezas
+		experimentais na análise física.
+	\end{abstract}
 }
 
-%------------------------------------------------------------------------------
+%- Documento principal --------------------------------------------------------
 
 \begin{document}
-%\pagenumbering{gobble} % Esconde o número de página, porque o documento é pequeno
 
-
-% Renderiza o título
 \maketitle
-
-%------------------------------------------------------------------------------
-% TEXTO
-%------------------------------------------------------------------------------
 
 \section{Motivação}
 
@@ -274,14 +194,12 @@ coeficiente de atrito cinético no sistema analisado.
 
 \newpage
 
-%------------------------------------------------------------------------------
-% REFERÊNCIAS
-%------------------------------------------------------------------------------
+%- Bibliografia ---------------------------------------------------------------
 
 %\bibliographystyle{unsrt}
 %\bibliography{ref}
 
-%------------------------------------------------------------------------------
+%- Apêndices ------------------------------------------------------------------
 
 \appendix
 
