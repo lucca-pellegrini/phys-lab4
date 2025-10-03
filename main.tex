@@ -103,11 +103,15 @@ Para a realização do experimento utilizamos:
 
 \section{Métodos}
 
-O bloco foi liberado a partir do repouso sobre a rampa inclinada de
-$\SI{30}{\degree}$. Com o auxílio dos sensores de luz, medimos o tempo $t$ que
-o bloco levava para percorrer intervalos de $\SI{0,05}{\metre}$. Os dados
-coletados foram ajustados no script \textit{Python} a uma função linear do
-tipo:
+Primeiro, medimos a massa do bloco de prova: $m = \SI{22}{\gram}$. Em seguida,
+fixamos a rampa em uma inclinação de $\theta = \SI{30 \pm 0.5}{\degree}$ em
+relação à horizontal, garantindo que o bloco deslize ao ser colocado na rampa,
+com a superfície de madeira em contato. O bloco foi liberado a partir do
+repouso sobre a rampa inclinada. Com o auxílio dos sensores de luz, medimos o
+tempo $t$ que o bloco levava para percorrer intervalos de $\SI{0.05}{\metre}$,
+começando do ponto inicial e repetindo para distâncias cumulativas de
+$\SI{0,05}{\metre}$ até $\SI{0.35}{\metre}$. Os dados coletados foram ajustados
+no script \textit{Python} a uma função linear do tipo:
 
 \begin{align}
 	x(t) &= \frac{at^2}{2} + v_0t, \nonumber \\
