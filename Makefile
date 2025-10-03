@@ -24,7 +24,7 @@ clean:
 		*.log *.blg *.ilg *.ind *.out *.wsp *.fls *.synctex* *.zip    \
 		*.tar.gz *.*~ build/ latex.out/
 
-$(MAIN).pdf: force
+$(MAIN).pdf: $(FIG) force
 	$(LATEX) $(LATEXFLAGS) $(MAIN).tex
 
 $(RELEASE).pdf: $(MAIN).pdf
