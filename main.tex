@@ -104,26 +104,7 @@ a posição inicial como $x(0) = \SI{0}{\meter}$.
 \section{Resultados}
 
 A tabela~\ref{tbl:dados} mostra os valores medidos de $\Delta x$, $t$ e
-$t^2$, sem arredondamento:
-
-\begin{table}[ht!]
-	\centering
-		\begin{tabular}{|| c | c | c ||}
-		\hline
-		$\Delta x$ ($\si{\metre}$) & $t$ ($\si{\second}$) & $t^2$ ($\si{\second^2}$) \\
-		\hline\hline
-		$0,05$ & $0,10225$ & $0,0104500625$ \\
-		$0,10$ & $0,18040$ & $0,0325441600$ \\
-		$0,15$ & $0,22880$ & $0,0522944400$ \\
-		$0,20$ & $0,27200$ & $0,0739840000$ \\
-		$0,25$ & $0,31830$ & $0,1012608900$ \\
-		$0,30$ & $0,35640$ & $0,1270100000$ \\
-		$0,35$ & $0,39620$ & $0,1569816400$ \\
-		\hline
-	\end{tabular}
-	\caption{Valores de $\Delta x$, $t$ e $t^2$ medidos sem arredondamento.}
-	\label{tbl:dados}
-\end{table}
+$t^2$.
 
 Do ajuste linear (veja a figura~\ref{fig:kinetic_friction}), obtivemos:
 
@@ -177,21 +158,41 @@ adotado, via ajuste linear da posição em função do tempo ao quadrado,
 mostrou-se eficaz para determinar a aceleração e, consequentemente, o
 coeficiente de atrito cinético no sistema analisado.
 
-\begin{onecolumn}
-\begin{figure}[h]
-        \centering
-        \includegraphics[width=15cm]{kinetic_friction_plot.pdf}
+%- Figuras --------------------------------------------------------------------
+
+\onecolumn
+
+\begin{figure}[p]
+		\includegraphics[width=\columnwidth]{kinetic_friction_plot.pdf}
 		\caption{
 			Gráfico de posição $\Delta x$ em função do tempo ao quadrado $t^2$.
 			O ajuste linear fornece $A = \SI{2,056 \pm
 			0,066}{\metre\per\second\squared}$ e $B = \SI{0,037 \pm
 			0,006}{\metre\per\second}$, onde $A = \frac{a}{2}$ e $B = v_0$.
 		}
-        \label{fig:kinetic_friction}
+		\label{fig:kinetic_friction}
 \end{figure}
-\end{onecolumn}
 
-\newpage
+\begin{table}[p]
+	\centering
+		\begin{tabular}{|| c | c | c ||}
+		\hline
+		$\Delta x$ ($\si{\metre}$) & $t$ ($\si{\second}$) & $t^2$ ($\si{\second^2}$) \\
+		\hline\hline
+		$0,05$ & $0,10225$ & $0,0104500625$ \\
+		$0,10$ & $0,18040$ & $0,0325441600$ \\
+		$0,15$ & $0,22880$ & $0,0522944400$ \\
+		$0,20$ & $0,27200$ & $0,0739840000$ \\
+		$0,25$ & $0,31830$ & $0,1012608900$ \\
+		$0,30$ & $0,35640$ & $0,1270100000$ \\
+		$0,35$ & $0,39620$ & $0,1569816400$ \\
+		\hline
+	\end{tabular}
+	\caption{Valores de $\Delta x$, $t$ e $t^2$ medidos sem arredondamento.}
+	\label{tbl:dados}
+\end{table}
+
+\clearpage
 
 %- Bibliografia ---------------------------------------------------------------
 
