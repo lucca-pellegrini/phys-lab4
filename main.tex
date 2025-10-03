@@ -87,10 +87,11 @@ Para a realização do experimento utilizamos:
 
 \section{Métodos}
 
-O bloco foi liberado a partir do repouso sobre a rampa inclinada de $30^\circ$.
-Com o auxílio dos sensores de luz, medimos o tempo $t$ que o bloco levava para
-percorrer intervalos de $\SI{0,05}{\metre}$. Os dados coletados foram ajustados
-no script \textit{Python} a uma função linear do tipo:
+O bloco foi liberado a partir do repouso sobre a rampa inclinada de
+$\SI{30}{\degree}$. Com o auxílio dos sensores de luz, medimos o tempo $t$ que
+o bloco levava para percorrer intervalos de $\SI{0,05}{\metre}$. Os dados
+coletados foram ajustados no script \textit{Python} a uma função linear do
+tipo:
 
 \begin{align}
 	x(t) &= \frac{at^2}{2} + v_0t, \nonumber \\
@@ -176,17 +177,15 @@ adotado, via ajuste linear da posição em função do tempo ao quadrado,
 mostrou-se eficaz para determinar a aceleração e, consequentemente, o
 coeficiente de atrito cinético no sistema analisado.
 
-%------------------------------------------------------------------------------------
-
-
 \begin{onecolumn}
 \begin{figure}[h]
         \centering
         \includegraphics[width=15cm]{kinetic_friction_plot.pdf}
 		\caption{
 			Gráfico de posição $\Delta x$ em função do tempo ao quadrado $t^2$.
-			O ajuste linear fornece $A = (2,056 \pm 0,066)$\,m/s$^2$ e $B =
-			(0,037 \pm 0,006)$\,m/s, onde $A = \frac{a}{2}$ e $B = v_0$.
+			O ajuste linear fornece $A = \SI{2,056 \pm
+			0,066}{\metre\per\second\squared}$ e $B = \SI{0,037 \pm
+			0,006}{\metre\per\second}$, onde $A = \frac{a}{2}$ e $B = v_0$.
 		}
         \label{fig:kinetic_friction}
 \end{figure}
