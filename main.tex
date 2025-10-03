@@ -121,12 +121,15 @@ no script \textit{Python} a uma função linear do tipo:
 onde consideramos $t^2$ como nossa variável independente, $A = \frac{a}{2}$, e
 a posição inicial como $x(0) = \SI{0}{\meter}$.
 
-\section{Resultados}
+\section{Desenvolvimento}
 
 A tabela~\ref{tbl:dados} mostra os valores medidos de $\Delta x$, $t$ e
 $t^2$.
 
-Do ajuste linear (veja a figura~\ref{fig:kinetic_friction}), obtivemos:
+Construímos diretamente o gráfico da posição $\Delta x$ em função do tempo ao
+quadrado $t^2$, que apresenta uma forma linear, conforme esperado para movimento
+com aceleração constante partindo do repouso. Do ajuste linear
+(veja a figura~\ref{fig:kinetic_friction}), obtivemos:
 
 \begin{align}\label{eq:accel}
 	A &= \left( 2,056 \pm 0,066 \right) \si{\metre\per\second\squared}, \nonumber \\
@@ -134,7 +137,12 @@ Do ajuste linear (veja a figura~\ref{fig:kinetic_friction}), obtivemos:
 	a &= \left( 4,1 \pm 0,1 \right) \si{\metre\per\second\squared}.
 \end{align}
 
-Sabemos que, para um corpo em um plano inclinado com atrito:
+Sabemos que, para um corpo em um plano inclinado com atrito, o diagrama de
+corpo livre mostra as forças: peso $mg$ para baixo, força normal $N$
+perpendicular à superfície, força de atrito $f_k$ oposta ao movimento, e a
+componente da gravidade ao longo da rampa $mg \sin\theta$. Aplicando a segunda
+lei de Newton na direção da rampa: $mg \sin\theta - f_k = ma$. Como $f_k =
+\mu_k N$ e $N = mg \cos\theta$, temos:
 
 \begin{align}\label{eq:mu}
 	\frac{a}{g} &= \sin\theta - \mu_k \cos\theta, \nonumber \\
@@ -152,10 +160,9 @@ Para calcular a incerteza, determinamos os valores máximo e mínimo possíveis 
 \end{align*}
 
 
-Substituindo $g = \SI{9.8}{\meter\per\second\squared}$, $\Delta g =
-\SI{0.05}{\meter\per\second\squared}$, $\theta = \SI{30}{\degree}$,
-$\Delta\theta = \SI{0.5}{\degree}$, e os valores de $a$ e $\Delta a$ obtidos em
-(\ref{eq:accel}), temos:
+Substituindo os valores $g = \SI{9.8 \pm 0.05}{\meter\per\second\squared}$,
+$\theta = \SI{30 \pm 0.5}{\degree}$, e os valores de $a$ e $\Delta a$ obtidos
+anteriormente em (\ref{eq:accel}), temos:
 
 \begin{align*}
 	\mu_{k_\text{max}} &\approx 0,11279, \\
